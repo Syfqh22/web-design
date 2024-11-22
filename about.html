@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CarryCo</title>
+    <link rel="stylesheet" href="AU.css">
+</head>
+<body>
+
+    <!-- Centered Clickable Logo -->
+    <header class="centered-logo">
+        <a href="homepage.html">
+            <img src="homepage/logo.png" alt="CarryCo Logo">
+        </a>
+    </header>
+
+    <!-- Main Content Section with Bold Statements -->
+	<section class="bold-section fade-in">
+    	<h1>YOUR GO-TO SHOP FOR <span class="highlight">QUALITY</span> AND <span class="highlight">STYLISH</span> BAGS</h1>
+    	<h1>FEATURING A RANGE OF <span class="highlight">BAGS</span></h1>
+    	<h2>THAT SUIT YOUR EVERYDAY NEEDS.</h2>
+        
+        <!-- Typewriter Effect Section -->
+        <div class="typewriter-container">
+            <span class="typewriter-text" id="typewriter-text"></span>
+        </div>
+    </section>
+
+    <!-- Inline JavaScript for Typewriter Effect -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const textElement = document.getElementById("typewriter-text");
+            const keywords = ["Stylish", "Durable", "Essentials", "Chic"];
+            let wordIndex = 0;
+            let letterIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = keywords[wordIndex];
+                if (isDeleting) {
+                    textElement.textContent = currentWord.substring(0, letterIndex--);
+                } else {
+                    textElement.textContent = currentWord.substring(0, letterIndex++);
+                }
+
+                if (!isDeleting && letterIndex === currentWord.length) {
+                    setTimeout(() => isDeleting = true, 1500);
+                } else if (isDeleting && letterIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % keywords.length;
+                }
+
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+
+            type();
+        });
+    </script>
+</body>
+</html>

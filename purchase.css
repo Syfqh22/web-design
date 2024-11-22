@@ -1,0 +1,148 @@
+/* Global Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;  /* Ensure body and html take full height */
+    overflow-x: hidden;
+}
+
+/* Centered Logo Section */
+.centered-logo {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+}
+
+.centered-logo img {
+    height: 60px;
+    cursor: pointer;
+}
+
+/* Order History Display Section */
+.order-history-display {
+    padding: 40px;
+    text-align: center;
+    background: linear-gradient(180deg, white, #D8BFD8);
+    color: #AA336A;
+    min-height: 100%;  /* Ensure content takes up full page height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the top */
+}
+
+/* Order History Header */
+.order-history-display h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Order History Grid */
+.order-history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Order History Item Styling */
+.order-history-item {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.order-history-item:hover {
+    transform: scale(1.05);
+}
+
+/* View Details Button Styling */
+.view-details-button {
+    background-color: #AA336A;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-button:hover {
+    background-color: #8a295b;
+}
+
+/* Order Overlay */
+.order-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.order-overlay-content {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeIn 0.5s ease forwards, scaleIn 0.4s ease forwards;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+}
+
+.order-overlay-content button {
+    background-color: #AA336A;
+    color: #fff;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.order-overlay-content button:hover {
+    background-color: #8a295b;
+}
+
+.order-overlay-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.7); }
+    to { transform: scale(1); }
+}

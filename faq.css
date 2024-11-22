@@ -1,0 +1,93 @@
+/* Global Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Centered Logo Section */
+.centered-logo {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+}
+
+.centered-logo img {
+    height: 60px;
+    cursor: pointer;
+}
+
+/* Full-Width FAQ Section Styling */
+.faq-section {
+    width: 100%; /* Full width */
+    padding: 40px 20px;
+    background: linear-gradient(180deg, white, #D8BFD8);
+    color: #AA336A;
+}
+
+.faq-section h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #AA336A;
+    margin-bottom: 20px;
+}
+
+/* FAQ Items */
+.faq-item {
+    padding: 15px 20px;
+    transition: color 0.3s ease;
+}
+
+.faq-item h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #AA336A;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.faq-item h2:hover {
+    color: #8a295b;
+}
+
+/* FAQ Answer Text with Hover Effect */
+.faq-item p {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-size: 1.1em;
+    line-height: 1.5;
+    color: #555;
+    transition: max-height 0.5s ease, color 0.5s ease;
+}
+
+/* Hover Effect to Show Answer */
+.faq-item:hover p {
+    max-height: 200px; /* Set a max height large enough to show the full answer */
+    margin-top: 10px;
+    padding: 5px 0;
+    color: #333;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+/* Separator Line */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #D8BFD8;
+    margin: 0;
+}
+
+/* Keyframes for Fading Effect */
+@keyframes fadeIn {
+    from {
+        color: #555;
+    }
+    to {
+        color: #333;
+    }
+}

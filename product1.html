@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product 1 - CarryCo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Centered Clickable Logo -->
+    <header class="centered-logo">
+        <a href="homepage.php">
+            <img src="homepage/logo.png" alt="CarryCo Logo">
+        </a>
+    </header>
+
+    <!-- Navigation for Product Pages -->
+    <nav class="product-nav">
+        <ul>
+            <li><a href="product1.html" class="current">Handbag&nbsp;</a></li>
+            <li><a href="product2.html">Backpack</a></li>
+            <li><a href="product3.html">Tote Bag&nbsp;</a></li>
+            <li><a href="product4.html">Clutch Purse&nbsp;</a></li>
+            <li><a href="product5.html">Duffle Bag&nbsp;</a></li>
+            <li><a href="product6.html">Crossbody Bag</a></li>
+        </ul>
+    </nav>
+
+    <!-- Product Display Section -->
+    <section class="product-display">
+        <div class="product-info">
+            <h1>Our Handbag Collection&nbsp;</h1>
+        </div>
+        
+        <!-- Image Grid with Hover Change Effect -->
+        <div class="image-grid">
+            <!-- Product A -->
+            <div class="image-item" onclick="showProductDetails('Brand: Swiss Polo', '3 in 1 Quilted Handbag', 'RM160.00', 1)">
+                <img src="product/sp.jpeg" alt="Product A" class="primary-image">
+                <img src="product/sp1.jpeg" alt="Product A Hover" class="hover-image">
+                <div class="image-hover-name">Swiss Polo</div>
+            </div>
+
+            <!-- Product B -->
+            <div class="image-item" onclick="showProductDetails('Product B', 'Description for Product B', '$89.99', 2)">
+                <img src="product/kipling.jpeg" alt="Product B" class="primary-image">
+                <img src="product/kipling1.jpeg" alt="Product B Hover" class="hover-image">
+                <div class="image-hover-name">Product B</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Overlay -->
+    <div id="product-overlay" class="product-overlay">
+        <div class="product-overlay-content">
+            <span class="close-button" onclick="closeProductDetails()">×</span>
+            <h2 id="overlay-name"></h2>
+            <p id="overlay-description"></p>
+            <p id="overlay-price"></p>
+
+            <!-- Add to Cart and Wishlist Buttons -->
+            <div class="overlay-buttons">
+                <button class="cart-button" onclick="addToCart()">Add to Cart</button>
+                <button class="wishlist-heart" onclick="toggleWishlist(this)">
+                    <i id="wishlist-heart-icon" class="heart-icon">&#9825;</i> <!-- Outline heart -->
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Popup -->
+    <div id="notification-popup" class="notification-popup">
+        <p id="notification-message"></p>
+        <button id="view-button" onclick="redirectToPage()">View</button>
+        <span class="close-notification" onclick="closeNotification()">×</span>
+    </div>
+
+    <script>
+        let overlayProductId = null;
+
+        // Show Product Overlay
+        function showProductDetails(name, description, price, productId) {
+            overlayProductId = productId; // Set current product ID for actions
+            document.getElementById('overlay-name').textContent = name;
+            document.getElementById('overlay-description').textContent = description;
+            document.getElementById('overlay-price').textContent = price;
+
+            // Reset Wishlist Button
+            const heartIcon = document.getElementById('wishlist-heart-icon');
+            heartIcon.innerHTML = '&#9825;'; // Set to outline by default
+            heartIcon.parentElement.classList.remove("active");
+
+            document.getElementById('product-overlay').style.display = 'flex';
+        }
+
+        // Close Product Overlay
+        function closeProductDetails() {
+            document.getElementById('product-overlay').style.display = 'none';
+        }
+
+        // Toggle Wishlist
+        async function toggleWishlist(element) {
+            const isAdded = !element.classList.contains("active");
+            const heartIcon = element.querySelector(".heart-icon");
+            const action = isAdded ? "add_to_wishlist.php" : "remove_from_wishlist.php";
+
+            // Update heart icon
+            if (isAdded) {
+                element.classList.add("active");
+                heartIcon.innerHTML = "&#9829;"; // Filled heart
+                showNotification("Added to wishlist successfully", "wishlist.html");
+            } else {
+                element.classList.remove("active");
+                heartIcon.innerHTML = "&#9825;"; // Outline heart
+                showNotification("Removed from wishlist", "wishlist.html");
+            }
+
+            // Send request to the backend
+            try {
+                await fetch(action, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `product_id=${overlayProductId}` // Use the current product ID
+                });
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        // Add to Cart
+        function addToCart() {
+            showNotification("Added to cart successfully", `homepage.php?showCart=true`);
+
+            // Send request to the backend
+            fetch("add_to_cart.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `product_id=${overlayProductId}`,
+            }).catch(error => console.error("Error:", error));
+        }
+
+        // Show Notification
+        function showNotification(message, redirectUrl) {
+            const notificationPopup = document.getElementById("notification-popup");
+            document.getElementById("notification-message").textContent = message;
+
+            // Handle redirect on "View" button click
+            document.getElementById("view-button").onclick = function () {
+                window.location.href = redirectUrl;
+            };
+
+            notificationPopup.style.display = "block";
+
+            // Automatically close notification after 3 seconds
+            setTimeout(() => {
+                notificationPopup.style.display = "none";
+            }, 3000);
+        }
+
+        // Close Notification
+        function closeNotification() {
+            document.getElementById("notification-popup").style.display = "none";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - CarryCo</title>
+    <link rel="stylesheet" href="purchase.css">
+</head>
+<body>
+
+    <!-- Centered Clickable Logo -->
+    <header class="centered-logo">
+        <a href="homepage.html">
+            <img src="homepage/logo.png" alt="CarryCo Logo">
+        </a>
+    </header>
+
+    <!-- Order History Display Section -->
+    <section class="order-history-display">
+        <h1>Your Order History</h1>
+
+        <div class="order-history-grid">
+            <div class="order-history-item">
+                <div class="order-info">
+                    <h2>Order #12345</h2>
+                    <p>Date: 2024-11-15</p>
+                    <p>Status: Paid</p>
+                    <p>Total: $199.99</p>
+                </div>
+                <button class="view-details-button" onclick="showOrderDetails('Product A', 'order1.jpeg')">View Details</button>
+            </div>
+
+            <div class="order-history-item">
+                <div class="order-info">
+                    <h2>Order #12346</h2>
+                    <p>Date: 2024-11-14</p>
+                    <p>Status: Paid</p>
+                    <p>Total: $249.99</p>
+                </div>
+                <button class="view-details-button" onclick="showOrderDetails('Product B', 'order2.jpeg')">View Details</button>
+            </div>
+            <!-- Add more orders dynamically as needed -->
+        </div>
+    </section>
+
+    <!-- Order Detail Overlay -->
+    <div id="order-overlay" class="order-overlay">
+        <div class="order-overlay-content">
+            <span class="close-button" onclick="closeOrderDetails()">×</span>
+            <img id="order-overlay-image" src="" alt="Order Image" class="order-overlay-image">
+            <h2 id="order-overlay-product-name"></h2>
+            <button onclick="reorder()">Reorder</button>
+        </div>
+    </div>
+
+    <script>
+        function showOrderDetails(productName, imageUrl) {
+            document.getElementById('order-overlay-product-name').textContent = productName;
+            document.getElementById('order-overlay-image').src = imageUrl;
+            document.getElementById('order-overlay').style.display = 'flex';
+        }
+
+        function closeOrderDetails() {
+            document.getElementById('order-overlay').style.display = 'none';
+        }
+
+        function reorder() {
+            alert("Order Reordered!");
+        }
+    </script>
+
+</body>
+</html>

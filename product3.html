@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product 3 - CarryCo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Centered Clickable Logo -->
+    <header class="centered-logo">
+        <a href="homepage.html">
+            <img src="homepage/logo.png" alt="CarryCo Logo">
+        </a>
+    </header>
+
+    <!-- Navigation for Product Pages -->
+    <nav class="product-nav">
+        <ul>
+            <li><a href="product1.html">Handbag&nbsp;</a></li>
+            <li><a href="product2.html">Backpack</a></li>
+            <li><a href="product3.html" class="current">Tote Bag&nbsp;</a></li>
+            <li><a href="product4.html">Clutch Purse&nbsp;</a></li>
+            <li><a href="product5.html">Duffle Bag&nbsp;</a></li>
+            <li><a href="product6.html">Crossbody Bag</a></li>
+        </ul>
+    </nav>
+
+    <!-- Product Display Section -->
+    <section class="product-display">
+        <div class="product-info">
+            <h1>Our Tote Bag Collection&nbsp;</h1>
+        </div>
+        
+        <!-- Image Grid with Hover Change Effect -->
+        <div class="image-grid">
+            <div class="image-item" onclick="showProductDetails('Product A', 'Description for Product A', '$99.99')">
+                <img src="product1/sp.jpeg" alt="Product A" class="primary-image">
+                <img src="product1/sp1.jpeg" alt="Product A Hover" class="hover-image">
+                <div class="image-hover-name">Product A</div>
+            </div>
+            <div class="image-item" onclick="showProductDetails('Product B', 'Description for Product B', '$89.99')">
+                <img src="product1/kipling.jpeg" alt="Product B" class="primary-image">
+                <img src="product1/kipling1.jpeg" alt="Product B Hover" class="hover-image">
+                <div class="image-hover-name">Product B</div>
+            </div>
+            <!-- Add more items as needed -->
+        </div>
+    </section>
+
+	<div id="product-overlay" class="product-overlay">
+    	<div class="product-overlay-content">
+        <span class="close-button" onclick="closeProductDetails()">×</span>
+        <h2 id="overlay-name"></h2>
+        <p id="overlay-description"></p>
+        <p id="overlay-price"></p>
+        <button onclick="addToCart()">Add to Cart</button>
+        <span class="wishlist-button" onclick="toggleWishlist(this)">
+            <i class="heart-icon"></i>
+        </span>
+    	</div>
+	</div>
+
+	<div id="notification-popup" class="notification-popup">
+    	<p id="notification-message"></p>
+    	<button id="view-button" onclick="redirectToPage()">View</button>
+    	<span class="close-notification" onclick="closeNotification()">×</span>
+	</div>
+
+    <script>
+        function showProductDetails(name, description, price) {
+            document.getElementById('overlay-name').textContent = name;
+            document.getElementById('overlay-description').textContent = description;
+            document.getElementById('overlay-price').textContent = price;
+            document.getElementById('product-overlay').style.display = 'flex';
+        }
+
+        function closeProductDetails() {
+            document.getElementById('product-overlay').style.display = 'none';
+        }
+		
+		function toggleWishlist(element) {
+    		element.classList.toggle("active");
+		}
+
+		function showNotification(message, redirectUrl) {
+    		document.getElementById("notification-message").textContent = message;
+
+    	const notificationPopup = document.getElementById("notification-popup");
+    		notificationPopup.style.display = "block";
+    		document.getElementById("view-button").onclick = function() {
+        	window.location.href = redirectUrl;
+    	};
+
+    	setTimeout(() => {
+        notificationPopup.style.display = "none";
+    	}, 3000);
+		}
+
+		function toggleWishlist(element) {
+    		element.classList.toggle("active");
+    	const isAdded = element.classList.contains("active");
+    		showNotification(
+        	isAdded ? "Added to wishlist successfully" : "Removed from wishlist",
+        	"wishlist.html"
+    	);
+		}
+
+		function addToCart() {
+    		showNotification("Added to cart successfully", "homepage.html?showCart=true");
+		}
+
+		function closeNotification() {
+    		document.getElementById("notification-popup").style.display = "none";
+		}
+
+    </script>
+</body>
+</html>

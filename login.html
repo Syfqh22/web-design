@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign Up</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <!-- Login/Sign Up Form Section -->
+    <section class="auth-section">
+        <!-- Login Container -->
+        <div class="auth-container" id="login-container">
+            <h2>Login to Your Account</h2>
+            <form action="process_login.php" method="POST" class="login-form" onsubmit="return handleLoginRedirect(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p class="switch-auth">Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+        </div>
+
+        <!-- Sign Up Container -->
+        <div class="auth-container hidden" id="signup-container">
+            <h2>Create an Account</h2>
+            <form action="process_signup.php" method="POST" class="signup-form" onsubmit="return handleSignUpRedirect(event)">
+                <div class="input-group">
+                    <label for="new-username">Username</label>
+                    <input type="text" id="new-username" name="new-username" placeholder="Choose a username" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">Password</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p class="switch-auth">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        </div>
+    </section>
+
+    <!-- Script for switching between login and sign up -->
+    <script>
+        function showSignUp() {
+            document.getElementById('login-container').classList.add('hidden'); // Hide login container
+            document.getElementById('signup-container').classList.remove('hidden'); // Show signup container
+        }
+
+        function showLogin() {
+            document.getElementById('signup-container').classList.add('hidden'); // Hide signup container
+            document.getElementById('login-container').classList.remove('hidden'); // Show login container
+        }
+
+        function handleLoginRedirect(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect');
+
+            if (redirectUrl) {
+                // Add redirect URL to the form action
+                event.target.action += `?redirect=${encodeURIComponent(redirectUrl)}`;
+            }
+            return true; // Allow form submission
+        }
+
+        function handleSignUpRedirect(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect');
+
+            if (redirectUrl) {
+                // Add redirect URL to the form action
+                event.target.action += `?redirect=${encodeURIComponent(redirectUrl)}`;
+            }
+            return true; // Allow form submission
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 CarryCo. Project by syfqh</p>
+        </div>
+    </footer>
+</body>
+</html>
